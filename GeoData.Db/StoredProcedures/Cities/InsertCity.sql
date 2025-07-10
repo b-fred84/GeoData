@@ -7,9 +7,8 @@
 
 AS
 BEGIN
-	IF NOT EXISTS ( SELECT 1 FROM Cities WHERE [Name] = @Name AND CountryId = @CountryId )
-	BEGIN
+
 		INSERT INTO Cities ([Name], CountryId, [Population], PopulationYear, IsCapital)
 		VALUES (@Name, @CountryId, @Population, @PopulationYear, @IsCapital)
-	END
+	
 END

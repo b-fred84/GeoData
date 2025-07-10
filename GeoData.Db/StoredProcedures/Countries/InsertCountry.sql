@@ -11,9 +11,9 @@
 	
 AS
 BEGIN
-	IF NOT EXISTS (SELECT 1 FROM Countires WHERE IsoCode2 = @IsoCode2)
-	BEGIN
-		INSERT INTO Countries (IsoCode2, [Name], IsoCode3, [Population], PopulationYear, [Language], Area) 
-		VALUES (@IsoCode2, @Name, @IsoCode3, @Population, @PopulationYear, @Language, @Area);
-	END
+  IF NOT EXISTS (SELECT 1 FROM Countries WHERE IsoCode2 = @IsoCode2)
+  BEGIN
+	INSERT INTO Countries (IsoCode2, [Name], IsoCode3, [Population], PopulationYear, [Language], Area) 
+	VALUES (@IsoCode2, @Name, @IsoCode3, @Population, @PopulationYear, @Language, @Area);
+  END
 END

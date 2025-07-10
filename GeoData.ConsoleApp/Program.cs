@@ -30,6 +30,6 @@ var provider = services.BuildServiceProvider();
 var importService = provider.GetRequiredService<GeoDataImporter>();
 
 //initial run to populate cities
-//await importService.ImportCountriesAndCitiesAsync();
+await importService.ImportCountriesAndCitiesAsync();
 
 Console.WriteLine("Import complete");

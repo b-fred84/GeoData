@@ -2,6 +2,7 @@
 using GeoData.Domain.Models;
 using GeoData.Infrastructure.ExternalApi.CountriesNow;
 using GeoData.Infrastructure.ExternalApi.CountriesNow.Mapping;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -38,7 +39,18 @@ namespace GeoData.Application.ImportServices
 
                 foreach (City city in cities)
                 {
-                    await _citiesRepo.InsertCityAsync(city);
+                    try
+                    {
+                        await _citiesRepo.InsertCityAsync(city);
+                    }
+                    catch (SqlException ex)
+                    {
+                        if(ex.Number == 2627 || ex.Number == 2601)
+                        {
+                            Console.WriteLine($"Duplicate city skipped: {city.Name} ({city.CountryId})");
+                        }
+                    }
+                    
                 }
             }
         }

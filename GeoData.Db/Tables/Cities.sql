@@ -8,3 +8,7 @@
     [IsCapital] BIT NOT NULL, 
     CONSTRAINT [FK_Cities_Countries] FOREIGN KEY ([CountryId]) REFERENCES [Countries]([IsoCode2])
 )
+
+GO
+
+CREATE UNIQUE INDEX [IX_Cities_Name_CountryId] ON [dbo].[Cities] ([Name], [CountryId])
