@@ -29,7 +29,19 @@ var provider = services.BuildServiceProvider();
 
 var importService = provider.GetRequiredService<GeoDataImporter>();
 
-//initial run to populate cities
-await importService.ImportCountriesAndCitiesAsync();
 
-Console.WriteLine("Import complete");
+#region calling methods to populate/update the db uncomment methods as needed
+//initial run to populate cities - runs and checks 70k+ rows
+//shouldn't need to be run normally, just initially.  
+
+//await importService.ImportCountriesAndCitiesAsync();
+
+
+//update capitals
+//await importService.UpdateCapitalCitiesAsync();
+
+//update country populations
+await importService.UpadateCountryPopulationAsync();
+#endregion
+
+Console.WriteLine("Update complete");

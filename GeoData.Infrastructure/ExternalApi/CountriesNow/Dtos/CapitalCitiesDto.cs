@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace GeoData.Infrastructure.ExternalApi.CountriesNow.Dtos
 {
+
+    //from endpoint: https://countriesnow.space/api/v0.1/countries/capital
     public class CapitalCitiesWrapper
     {
         [JsonProperty("data")]

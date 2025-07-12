@@ -27,13 +27,17 @@ namespace GeoData.Application.ImportServices
             _citiesRepo = citiesRepo;
         }
 
+
+        //initial method for adding county/city names and iso2/3 codes to populate the db.
+        //Is a lot of data (70k+ cities) from this endpoint.
+        //should only run this to insert initial records (or periodically to check for updates in the extrnal api)
         public async Task ImportCountriesAndCitiesAsync()
         {
             var wrapper = await _apiClient.GetCountryAndCityNamesAsync();
 
             foreach (var dto in wrapper.CountryAndCityNamesData)
             {
-                var (country, cities) = CountryAndCityMapper.MapTo_CountryAndCity(dto);
+                var (country, cities) = GeoMapper.MapTo_CountryAndCity(dto);
 
                 await _countriesRepo.InsertCountryAsync(country);
 
@@ -54,5 +58,41 @@ namespace GeoData.Application.ImportServices
                 }
             }
         }
+
+
+        //updates the capital cities,  takes the name and iso2 and matches to the db rows
+        //sets IsCapital to true where it matches
+        public async Task UpdateCapitalCitiesAsync()
+        {
+            var wrapper = await _apiClient.GetCapitalCitiesAsync();
+
+            foreach (var dto in wrapper.Data)
+            {
+                var city = GeoMapper.MapTo_City_UpdateCapitalCities(dto);
+
+                await _citiesRepo.UpdateCapitalCityStatusAsync(city);
+            }
+        }
+
+        public async Task UpadateCountryPopulationAsync()
+        {
+            var wrapper = await _apiClient.GetCountryPopulationAsync();
+
+            foreach (var dto in wrapper.Data)
+            {
+                var country = GeoMapper.MapTo_Country_PopulationData(dto);
+
+                var latestPop = dto.PopulationCounts.OrderByDescending(p => p.Year).FirstOrDefault();
+
+                if (latestPop == null) continue;
+
+                country.Population = (int)latestPop.Value;
+                country.PopulationYear = latestPop.Year;
+
+                await _countriesRepo.UpdateCountryAsync(country);
+            }
+        }
+
+        
     }
 }

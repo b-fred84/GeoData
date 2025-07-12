@@ -45,6 +45,12 @@ namespace GeoData.Infrastructure.Repos
             await _dataAccess.SaveDataAsync("dbo.InsertCity", parameters);
         }
 
+        public async Task UpdateCapitalCityStatusAsync(City city)
+        {
+            await _dataAccess.SaveDataAsync("dbo.UpdateCapitals", new { Name = city.Name, CountryId = city.CountryId });
+        }
+
+
         public Task UpdateCityAsync(City city)
         {
             throw new NotImplementedException();

@@ -17,7 +17,7 @@ namespace GeoData.Infrastructure.ExternalApi.CountriesNow.Dtos
         [JsonProperty("country")]
         public string Country { get; set; }
 
-        [JsonProperty("code")]
+        [JsonProperty("code")]  //same as iso3 - not needed just use iso3
         public string Code { get; set; }
 
         [JsonProperty("iso3")]

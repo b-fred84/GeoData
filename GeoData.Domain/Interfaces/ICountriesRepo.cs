@@ -10,7 +10,7 @@ namespace GeoData.Domain.Interfaces
     public interface ICountriesRepo
     {
         Task InsertCountryAsync(Country country);
-        Task UpdateCounrtyAsync(Country country);
+        Task UpdateCountryAsync(Country country);
         Task DeleteCountryAsync(string iso2);
         Task<IEnumerable<Country>> GetAllAsync();
         Task<Country> GetCountryByIdAsync(string iso2);

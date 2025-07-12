@@ -36,9 +36,22 @@ namespace GeoData.Infrastructure.Repos
             await _dataAccess.SaveDataAsync("dbo.InsertCountry", country);
         }
 
-        public Task UpdateCounrtyAsync(Country country)
+        
+        public async Task UpdateCountryAsync(Country country)
         {
-            throw new NotImplementedException();
+            var parameters = new
+            {
+                IsoCode3 = country.IsoCode3,
+                Population = country.Population,
+                PopulationYear = country.PopulationYear,
+                Continent = country.Continent,
+                Language = country.Language,
+                Area = country.Area,
+            };
+
+            await _dataAccess.SaveDataAsync("dbo.UpdateCountry", parameters);
         }
+
+        
     }
 }

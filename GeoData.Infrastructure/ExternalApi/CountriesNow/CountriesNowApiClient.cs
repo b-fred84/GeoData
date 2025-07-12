@@ -38,5 +38,19 @@ namespace GeoData.Infrastructure.ExternalApi.CountriesNow
             return await GetGeoApiDataAsync<CountryAndCityNamesWrapper>("https://countriesnow.space/api/v0.1/countries");
         }
 
+        public async Task<CapitalCitiesWrapper> GetCapitalCitiesAsync()
+        {
+            return await GetGeoApiDataAsync<CapitalCitiesWrapper>("https://countriesnow.space/api/v0.1/countries/capital");
+        }
+
+        public async Task<CountryPopWrapper> GetCountryPopulationAsync()
+        {
+            return await GetGeoApiDataAsync<CountryPopWrapper>("https://countriesnow.space/api/v0.1/countries/population");
+        }
+
+        public async Task<CityPopulationWrapper> GetCityPopulationAsync()
+        {
+            return await GetGeoApiDataAsync<CityPopulationWrapper>("");
+        }
     }
 }
