@@ -12,8 +12,9 @@ namespace GeoData.Domain.Interfaces
         Task InsertCityAsync(City city);
         Task UpdateCityAsync(City city);
         Task DeleteCityAsync(int id);
-        Task<IEnumerable<City>> GetAllAsync();
-        Task<City> GetByIdAsync(int id);
+        Task<IEnumerable<City>> GetAllCitiesAsync();
+        Task<City> GetCityByIdAsync(int id);
         Task UpdateCapitalCityStatusAsync(City city);
+        Task UpadateCityPopulationAsync(City city);
     }
 }

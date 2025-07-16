@@ -1,0 +1,8 @@
+﻿CREATE PROCEDURE [dbo].[GetAllCountries]
+
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT * FROM Countries;
+END

@@ -1,5 +1,5 @@
 ﻿using GeoData.Domain.Models;
-using GeoData.Infrastructure.ExternalApi.CountriesNow.Dtos;
+using GeoData.Infrastructure.ExternalApi.ApiCountriesNow.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GeoData.Infrastructure.ExternalApi.CountriesNow.Mapping
+namespace GeoData.Infrastructure.ExternalApi.Mapping
 {
     public class GeoMapper
     {
@@ -21,7 +21,6 @@ namespace GeoData.Infrastructure.ExternalApi.CountriesNow.Mapping
                 Population = null,
                 PopulationYear = null,
                 Continent = null,
-                Language = null,
                 Area = null
             };
 
@@ -68,6 +67,17 @@ namespace GeoData.Infrastructure.ExternalApi.CountriesNow.Mapping
             };
 
             return country;
+        }
+
+        public static City MapTo_City_PopulationData(string cityName, string Iso2, string population, string year)
+        {
+            return new City
+            {
+                Name = cityName,
+                CountryId = Iso2,
+                Population = (int)decimal.Parse(population),
+                PopulationYear = int.Parse(year)
+            };
         }
        
       

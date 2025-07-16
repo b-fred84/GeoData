@@ -68,6 +68,9 @@
     <Build Include="StoredProcedures\Cities\InsertCity.sql" />
     <Build Include="StoredProcedures\Cities\UpdateCapitals.sql" />
     <Build Include="StoredProcedures\Countries\UpdateCountry.sql" />
+    <Build Include="StoredProcedures\Cities\UpdateCityPopulation.sql" />
+    <Build Include="StoredProcedures\Countries\GetAllCountries.sql" />
+    <Build Include="StoredProcedures\Cities\GetAllCities.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GeoData.Db.publish.xml" />

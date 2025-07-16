@@ -21,9 +21,9 @@ namespace GeoData.Infrastructure.Repos
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Country>> GetAllAsync()
+        public async Task<IEnumerable<Country>> GetAllCountriesAsync()
         {
-            throw new NotImplementedException();
+            return await _dataAccess.LoadDataAsync<Country, dynamic>("dbo.GetAllCountries", new { });
         }
 
         public Task<Country> GetCountryByIdAsync(string iso2)
@@ -45,7 +45,6 @@ namespace GeoData.Infrastructure.Repos
                 Population = country.Population,
                 PopulationYear = country.PopulationYear,
                 Continent = country.Continent,
-                Language = country.Language,
                 Area = country.Area,
             };
 

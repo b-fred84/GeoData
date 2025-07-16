@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GeoData.Infrastructure.ExternalApi.CountriesNow.Dtos
+namespace GeoData.Infrastructure.ExternalApi.ApiCountriesNow.Dtos
 {
     public class CountryPopWrapper
     {

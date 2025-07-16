@@ -7,8 +7,9 @@
 
 AS
 BEGIN
+	SET NOCOUNT ON;
 
-		INSERT INTO Cities ([Name], CountryId, [Population], PopulationYear, IsCapital)
-		VALUES (@Name, @CountryId, @Population, @PopulationYear, @IsCapital)
+	INSERT INTO Cities ([Name], CountryId, [Population], PopulationYear, IsCapital)
+	VALUES (@Name, @CountryId, @Population, @PopulationYear, @IsCapital)
 	
 END

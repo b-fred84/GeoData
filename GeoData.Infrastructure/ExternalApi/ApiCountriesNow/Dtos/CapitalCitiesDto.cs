@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GeoData.Infrastructure.ExternalApi.CountriesNow.Dtos
+namespace GeoData.Infrastructure.ExternalApi.ApiCountriesNow.Dtos
 {
 
     //from endpoint: https://countriesnow.space/api/v0.1/countries/capital

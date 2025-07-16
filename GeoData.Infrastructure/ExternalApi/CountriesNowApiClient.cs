@@ -1,5 +1,5 @@
 ﻿using GeoData.Domain.Models;
-using GeoData.Infrastructure.ExternalApi.CountriesNow.Dtos;
+using GeoData.Infrastructure.ExternalApi.ApiCountriesNow.Dtos;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GeoData.Domain.Interfaces;
 
-namespace GeoData.Infrastructure.ExternalApi.CountriesNow
+namespace GeoData.Infrastructure.ExternalApi
 {
     public class CountriesNowApiClient 
     {
@@ -50,7 +50,7 @@ namespace GeoData.Infrastructure.ExternalApi.CountriesNow
 
         public async Task<CityPopulationWrapper> GetCityPopulationAsync()
         {
-            return await GetGeoApiDataAsync<CityPopulationWrapper>("");
+            return await GetGeoApiDataAsync<CityPopulationWrapper>("https://countriesnow.space/api/v0.1/countries/population/cities");
         }
     }
 }

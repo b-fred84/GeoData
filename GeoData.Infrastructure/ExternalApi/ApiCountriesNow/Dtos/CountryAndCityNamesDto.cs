@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace GeoData.Infrastructure.ExternalApi.CountriesNow.Dtos
+namespace GeoData.Infrastructure.ExternalApi.ApiCountriesNow.Dtos
 {
 
     // from endpont https://countriesnow.space/api/v0.1/countries

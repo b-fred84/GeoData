@@ -21,12 +21,12 @@ namespace GeoData.Infrastructure.Repos
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<City>> GetAllAsync()
+        public async Task<IEnumerable<City>> GetAllCitiesAsync()
         {
-            throw new NotImplementedException();
+            return await _dataAccess.LoadDataAsync<City, dynamic>("dbo.GetAllCities", new { });
         }
 
-        public Task<City> GetByIdAsync(int id)
+        public Task<City> GetCityByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
@@ -54,6 +54,19 @@ namespace GeoData.Infrastructure.Repos
         public Task UpdateCityAsync(City city)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task UpadateCityPopulationAsync(City city)
+        {
+            var parameters = new
+            {
+                CountryId = city.CountryId,
+                CityName = city.Name,
+                Population = city.Population,
+                PopulationYear = city.PopulationYear
+            };
+
+            await _dataAccess.SaveDataAsync("dbo.UpdateCityPopulation", parameters);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using GeoData.Application.ImportServices;
 using GeoData.Domain.Interfaces;
-using GeoData.Infrastructure.ExternalApi.CountriesNow;
+using GeoData.Infrastructure.ExternalApi;
 using GeoData.Infrastructure.Repos;
 using GeoData.Infrastructure.SqlDataAccess;
 using Microsoft.Extensions.Configuration;
@@ -41,7 +41,13 @@ var importService = provider.GetRequiredService<GeoDataImporter>();
 //await importService.UpdateCapitalCitiesAsync();
 
 //update country populations
-await importService.UpadateCountryPopulationAsync();
+//await importService.UpdateCountryPopulationAsync();
+
+
+//update city populations
+await importService.UpdateCityPopulationsAsync();
+
+
 #endregion
 
 Console.WriteLine("Update complete");

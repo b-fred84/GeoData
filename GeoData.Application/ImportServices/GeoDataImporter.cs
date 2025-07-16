@@ -1,7 +1,7 @@
 ﻿using GeoData.Domain.Interfaces;
 using GeoData.Domain.Models;
-using GeoData.Infrastructure.ExternalApi.CountriesNow;
-using GeoData.Infrastructure.ExternalApi.CountriesNow.Mapping;
+using GeoData.Infrastructure.ExternalApi;
+using GeoData.Infrastructure.ExternalApi.Mapping;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -74,7 +74,7 @@ namespace GeoData.Application.ImportServices
             }
         }
 
-        public async Task UpadateCountryPopulationAsync()
+        public async Task UpdateCountryPopulationAsync()
         {
             var wrapper = await _apiClient.GetCountryPopulationAsync();
 
@@ -90,6 +90,37 @@ namespace GeoData.Application.ImportServices
                 country.PopulationYear = latestPop.Year;
 
                 await _countriesRepo.UpdateCountryAsync(country);
+            }
+        }
+
+        public async Task UpdateCityPopulationsAsync()
+        {
+            var wrapper = await _apiClient.GetCityPopulationAsync();
+
+            var countries = await _countriesRepo.GetAllCountriesAsync();
+            var countryNametoIso2Dict = countries.ToDictionary(c => c.Name, c => c.IsoCode2);
+
+
+            var cities = await _citiesRepo.GetAllCitiesAsync();
+            var cityKeyDict = cities.ToDictionary(c => (c.CountryId, c.Name)); 
+
+            foreach(var dto in wrapper.Data)
+            {
+                if (!countryNametoIso2Dict.TryGetValue(dto.Country, out var countryIso2)) continue;
+
+                if (!cityKeyDict.TryGetValue((countryIso2, dto.City), out var cityInDb)) continue;
+
+                var mostRecentPop = dto.PopulationCounts.OrderByDescending(pc => int.Parse(pc.Year)).FirstOrDefault();
+
+                if (mostRecentPop == null) continue;
+
+                City city = GeoMapper.MapTo_City_PopulationData(
+                    dto.City,
+                    countryIso2,
+                    mostRecentPop.Population,
+                    mostRecentPop.Year);
+
+                await _citiesRepo.UpadateCityPopulationAsync(city);
             }
         }
 

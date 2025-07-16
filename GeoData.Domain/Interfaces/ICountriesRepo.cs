@@ -12,7 +12,7 @@ namespace GeoData.Domain.Interfaces
         Task InsertCountryAsync(Country country);
         Task UpdateCountryAsync(Country country);
         Task DeleteCountryAsync(string iso2);
-        Task<IEnumerable<Country>> GetAllAsync();
+        Task<IEnumerable<Country>> GetAllCountriesAsync();
         Task<Country> GetCountryByIdAsync(string iso2);
 
     }

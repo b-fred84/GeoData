@@ -1,0 +1,9 @@
+﻿CREATE PROCEDURE [dbo].[GetAllCities]
+
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT * FROM Cities;
+END
+

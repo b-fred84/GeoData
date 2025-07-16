@@ -6,14 +6,15 @@
 	@Population INT = NULL,
 	@PopulationYear INT = NULL,
 	@Continent CHAR(13) = NULL,
-	@Language NVARCHAR(50) = NULL,
 	@Area INT = NULL
 	
 AS
 BEGIN
-  IF NOT EXISTS (SELECT 1 FROM Countries WHERE IsoCode2 = @IsoCode2)
-  BEGIN
-	INSERT INTO Countries (IsoCode2, [Name], IsoCode3, [Population], PopulationYear, [Language], Area) 
-	VALUES (@IsoCode2, @Name, @IsoCode3, @Population, @PopulationYear, @Language, @Area);
-  END
+	SET NOCOUNT ON;
+
+	IF NOT EXISTS (SELECT 1 FROM Countries WHERE IsoCode2 = @IsoCode2)
+	BEGIN
+		INSERT INTO Countries (IsoCode2, [Name], IsoCode3, [Population], PopulationYear, Area) 
+		VALUES (@IsoCode2, @Name, @IsoCode3, @Population, @PopulationYear, @Area);
+	END
 END

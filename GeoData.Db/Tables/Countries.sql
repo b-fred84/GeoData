@@ -6,6 +6,5 @@
     [Population] INT NULL, 
     [PopulationYear] INT NULL,
     [Continent] CHAR(13) NULL, 
-    [Language] NVARCHAR(50) NULL, 
     [Area] INT NULL,
 )
