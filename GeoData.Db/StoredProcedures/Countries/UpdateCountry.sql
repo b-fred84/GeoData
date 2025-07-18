@@ -1,5 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[UpdateCountry]
-	@IsoCode3 CHAR(3),
+    @Iso2 CHAR(2) = NULL,
+	@Iso3 CHAR(3) = NULL,
 	@Population INT = NULL,
 	@PopulationYear INT = NULL,
 	@Continent CHAR(13) = NULL,
@@ -15,6 +16,12 @@ BEGIN
 		Continent = CASE WHEN @Continent IS NOT NULL THEN @Continent ELSE Continent END,
 		Area = CASE WHEN @Area IS NOT NULL THEN @Area ELSE Area END
 	WHERE 
-		IsoCode3 = @IsoCode3;
+		(
+			(@Iso2 IS NOT NULL AND IsoCode2 = @Iso2)
+			OR
+			(@Iso2 IS NULL AND @Iso3 IS NOT NULL AND IsoCode3 = @Iso3)
+
+		
+		)
 
 END

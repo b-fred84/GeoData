@@ -7,14 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GeoData.Domain.Interfaces;
+using GeoData.Infrastructure.ExternalApi.ApiRestCountries.Dtos;
 
 namespace GeoData.Infrastructure.ExternalApi
 {
-    public class CountriesNowApiClient 
+    public class ExternalApiClient 
     {
         private readonly HttpClient _httpClient;
 
-        public CountriesNowApiClient(HttpClient httpClient)
+        public ExternalApiClient(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
@@ -33,6 +34,7 @@ namespace GeoData.Infrastructure.ExternalApi
             return JsonConvert.DeserializeObject<T>(responseContent);
         }
 
+        #region endpoints from countriesNow.space
         public async Task<CountryAndCityNamesWrapper> GetCountryAndCityNamesAsync()
         {
             return await GetGeoApiDataAsync<CountryAndCityNamesWrapper>("https://countriesnow.space/api/v0.1/countries");
@@ -52,5 +54,19 @@ namespace GeoData.Infrastructure.ExternalApi
         {
             return await GetGeoApiDataAsync<CityPopulationWrapper>("https://countriesnow.space/api/v0.1/countries/population/cities");
         }
+
+        #endregion
+
+        #region endpoints from restcountries.com
+        public async Task<AreaAndContinentDto> GetAreaAndContinentDataAsync(string iso2)
+        {
+            var result = await GetGeoApiDataAsync<List<AreaAndContinentDto>>($"https://restcountries.com/v3.1/alpha?codes={iso2}");
+
+            return result?.FirstOrDefault();
+        }
+
+
+
+        #endregion
     }
 }

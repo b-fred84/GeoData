@@ -14,11 +14,11 @@ namespace GeoData.Application.ImportServices
 {
     public class GeoDataImporter
     {
-        private readonly CountriesNowApiClient _apiClient;
+        private readonly ExternalApiClient _apiClient;
         private readonly ICountriesRepo _countriesRepo;
         private readonly ICitiesRepo _citiesRepo;
 
-        public GeoDataImporter(CountriesNowApiClient apiClient,
+        public GeoDataImporter(ExternalApiClient apiClient,
         ICountriesRepo countriesRepo,
         ICitiesRepo citiesRepo)
         {
@@ -124,6 +124,20 @@ namespace GeoData.Application.ImportServices
             }
         }
 
-        
+        public async Task UpdateCountryAreaAndContinentAsync()
+        {
+            var countries = await _countriesRepo.GetAllCountriesAsync();
+
+            foreach(var country in countries)
+            {
+                var dto = await _apiClient.GetAreaAndContinentDataAsync(country.IsoCode2);
+
+                if (dto == null) continue;
+
+                var updatedCountry = GeoMapper.MapTo_Country_AreaAndContinent(dto);
+
+                await _countriesRepo.UpdateCountryAsync(updatedCountry);
+            }
+        }
     }
 }

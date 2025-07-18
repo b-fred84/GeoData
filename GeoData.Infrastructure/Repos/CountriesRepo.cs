@@ -41,7 +41,8 @@ namespace GeoData.Infrastructure.Repos
         {
             var parameters = new
             {
-                IsoCode3 = country.IsoCode3,
+                Iso2 = country.IsoCode2,
+                Iso3 = country.IsoCode3,
                 Population = country.Population,
                 PopulationYear = country.PopulationYear,
                 Continent = country.Continent,

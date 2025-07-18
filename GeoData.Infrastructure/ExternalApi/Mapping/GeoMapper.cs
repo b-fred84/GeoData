@@ -1,5 +1,6 @@
 ﻿using GeoData.Domain.Models;
 using GeoData.Infrastructure.ExternalApi.ApiCountriesNow.Dtos;
+using GeoData.Infrastructure.ExternalApi.ApiRestCountries.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,6 +80,38 @@ namespace GeoData.Infrastructure.ExternalApi.Mapping
                 PopulationYear = int.Parse(year)
             };
         }
+
+        public static Country MapTo_Country_AreaAndContinent(AreaAndContinentDto dto)
+        {
+            if(dto.Continent != "Americas")
+            {
+                return new Country
+                {
+                    IsoCode2 = dto.Iso2,
+                    Area = (int)dto.Area,
+                    Continent = dto.Continent
+                };
+            }
+            else if(dto.ContinentAmericas == "Central America"  || dto.ContinentAmericas == "Caribbean")
+            {
+                return new Country
+                {
+                    IsoCode2 = dto.Iso2,
+                    Area = (int)dto.Area,
+                    Continent = "North America"
+                };
+            }
+            else
+            {
+                return new Country
+                {
+                    IsoCode2 = dto.Iso2,
+                    Area = (int)dto.Area,
+                    Continent = dto.ContinentAmericas
+                };
+            }
+        }
+            
        
       
     }

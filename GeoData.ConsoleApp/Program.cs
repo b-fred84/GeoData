@@ -21,7 +21,7 @@ services.AddScoped<ISqlDataAccess, SqlDataAccess>();
 services.AddScoped<ICountriesRepo, CountriesRepo>();
 services.AddScoped<ICitiesRepo, CitiesRepo>();
 
-services.AddHttpClient<CountriesNowApiClient>();
+services.AddHttpClient<ExternalApiClient>();
 
 services.AddScoped<GeoDataImporter>();
 
@@ -45,9 +45,10 @@ var importService = provider.GetRequiredService<GeoDataImporter>();
 
 
 //update city populations
-await importService.UpdateCityPopulationsAsync();
+//await importService.UpdateCityPopulationsAsync();
 
-
+//update area and continents for countries
+await importService.UpdateCountryAreaAndContinentAsync();
 #endregion
 
 Console.WriteLine("Update complete");
