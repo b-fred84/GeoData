@@ -48,7 +48,9 @@ var importService = provider.GetRequiredService<GeoDataImporter>();
 //await importService.UpdateCityPopulationsAsync();
 
 //update area and continents for countries
-await importService.UpdateCountryAreaAndContinentAsync();
+//await importService.UpdateCountryAreaAndContinentAsync();
+
+
+//Console.WriteLine("Update complete");
 #endregion
 
-Console.WriteLine("Update complete");
